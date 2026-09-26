@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anuj Syal | Senior Engineer, DevOps & Quality Engineering</title>
+<meta name="description" content="Anuj Syal, Senior Engineer in New Delhi. CI/CD pipelines, Docker, Kubernetes, test automation and Agentic AI testing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF0F4; --surface:#FFFFFF; --ink:#152033; --muted:#5A6678; --line:#D3DAE4;
+  --accent:#2F5BEA; --accent-soft:#E3E9FD; --pass:#178A5B; --run:#B8771A; --idle:#A7B1C0;
+  --console:#152033; --console-ink:#CFD9E8; --console-dim:#7F8CA3;
+  --display:"Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --body:"Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1522; --surface:#162033; --ink:#E7ECF4; --muted:#98A5B8; --line:#27344C;
+    --accent:#86A2FF; --accent-soft:#1E2B4C; --pass:#3CC48A; --run:#F0B54F; --idle:#4A5873;
+    --console:#090F19; --console-ink:#CFD9E8; --console-dim:#6F7D94;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1522; --surface:#162033; --ink:#E7ECF4; --muted:#98A5B8; --line:#27344C;
+  --accent:#86A2FF; --accent-soft:#1E2B4C; --pass:#3CC48A; --run:#F0B54F; --idle:#4A5873;
+  --console:#090F19; --console-ink:#CFD9E8; --console-dim:#6F7D94;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-underline-offset:3px}
+img{max-width:100%}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* nav */
+header.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:60px}
+.brand{font-family:var(--display);font-weight:700;font-size:20px;color:var(--ink);text-decoration:none;letter-spacing:-.01em;margin-right:auto}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;overflow-x:auto}
+.nav ul a{display:block;padding:6px 10px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:15px;white-space:nowrap}
+.nav ul a:hover{color:var(--ink);background:var(--surface)}
+.theme-btn{flex:none;width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.theme-btn svg{width:18px;height:18px}
+
+/* hero */
+.hero{padding:72px 0 88px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--muted);margin:0 0 20px}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--pass);box-shadow:0 0 0 4px color-mix(in srgb,var(--pass) 22%,transparent)}
+h1{font-family:var(--display);font-weight:800;font-variation-settings:"wdth" 78;font-size:clamp(64px,10vw,132px);line-height:.86;letter-spacing:-.035em;margin:0 0 28px}
+h1 span{display:block}
+.lede{font-size:clamp(18px,1.8vw,21px);line-height:1.5;max-width:30ch;margin:0 0 32px;color:var(--ink)}
+.lede em{font-style:normal;color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:600;font-size:16px;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:var(--surface)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#0E1522}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.primary{color:#0E1522}}
+.btn:hover{border-color:var(--accent)}
+.btn svg{width:18px;height:18px}
+
+/* pipeline */
+.pipe{background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 30px 60px -30px color-mix(in srgb,var(--ink) 35%,transparent)}
+.pipe-head{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.pipe-title{font-weight:600;font-size:15px}
+.pipe-title small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+.badge{margin-left:auto;font-size:13px;font-weight:600;padding:4px 10px;border-radius:999px;background:color-mix(in srgb,var(--run) 16%,transparent);color:var(--run)}
+.badge.ok{background:color-mix(in srgb,var(--pass) 16%,transparent);color:var(--pass)}
+.rerun{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;padding:5px 10px;font:inherit;font-size:13px;cursor:pointer}
+.rerun:hover{border-color:var(--accent)}
+.stages{display:grid;grid-template-columns:repeat(5,1fr);list-style:none;margin:0;padding:22px 20px 18px;position:relative}
+.stages li{display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;font-size:13px;color:var(--muted);text-align:center}
+.stages li::before{content:"";position:absolute;top:13px;left:calc(-50% + 16px);right:calc(50% + 16px);height:2px;background:var(--line);transition:background .3s}
+.stages li:first-child::before{display:none}
+.stages li.pass::before,.stages li.run::before{background:var(--pass)}
+.node{width:28px;height:28px;border-radius:50%;border:2px solid var(--idle);display:grid;place-items:center;background:var(--surface);position:relative;z-index:1;transition:border-color .25s,background .25s}
+.node svg{width:14px;height:14px;opacity:0;color:#fff}
+li.run .node{border-color:var(--run);border-top-color:transparent;animation:spin .8s linear infinite}
+li.pass .node{border-color:var(--pass);background:var(--pass)}
+li.pass .node svg{opacity:1}
+li.pass,li.run{color:var(--ink)}
+.stages .t{font-family:var(--mono);font-size:11px;color:var(--muted);min-height:16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.log{margin:0;background:var(--console);color:var(--console-ink);font-family:var(--mono);font-size:13px;line-height:1.75;padding:18px 20px;height:236px;overflow:auto}
+.log div{white-space:pre-wrap;word-break:break-word}
+.log .cmd{color:var(--console-dim)}
+.log .ok::before{content:"✓ ";color:#3CC48A}
+.log .live{color:#fff;font-weight:500}
+.log .live::before{content:"● ";color:#3CC48A}
+.cursor{display:inline-block;width:8px;height:15px;background:var(--console-ink);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* sections */
+section.block{padding:88px 0;border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:260px 1fr;gap:40px;align-items:start}
+h2{font-family:var(--display);font-weight:700;font-variation-settings:"wdth" 85;font-size:clamp(34px,4vw,48px);line-height:1;letter-spacing:-.02em;margin:0}
+.sec-intro{color:var(--muted);margin:14px 0 0;font-size:16px;max-width:28ch}
+
+/* about */
+.about p{font-size:clamp(20px,2.1vw,26px);line-height:1.45;margin:0 0 18px;max-width:34ch;font-family:var(--display);font-variation-settings:"wdth" 92;font-weight:500;letter-spacing:-.01em}
+.about p.small{font-family:var(--body);font-size:17px;color:var(--muted);max-width:60ch;font-weight:400;letter-spacing:0;line-height:1.65}
+
+/* impact */
+.meters{list-style:none;margin:0;padding:0}
+.meters li{display:grid;grid-template-columns:minmax(0,1fr) 88px;gap:6px 20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.meters li:first-child{padding-top:0}
+.meters .label{font-weight:500}
+.meters .val{font-family:var(--display);font-weight:700;font-size:28px;line-height:1;text-align:right;grid-row:span 2;align-self:center;font-variation-settings:"wdth" 80}
+.bar{height:8px;border-radius:99px;background:var(--accent-soft);overflow:hidden}
+.bar i{display:block;height:100%;width:var(--w);background:var(--accent);border-radius:99px}
+.counts{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:28px;color:var(--muted)}
+.counts b{color:var(--ink);font-family:var(--display);font-size:22px;margin-right:6px}
+
+/* experience timeline */
+.timeline{list-style:none;margin:0;padding:0;position:relative}
+.timeline::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.job{position:relative;padding-left:40px;padding-bottom:48px}
+.job:last-child{padding-bottom:0}
+.job::before{content:"";position:absolute;left:0;top:7px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
+.job.current::before{background:var(--accent)}
+.job-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;align-items:baseline}
+.job h3{font-family:var(--display);font-size:24px;font-weight:700;margin:0;letter-spacing:-.01em}
+.job .when{color:var(--muted);font-size:15px}
+.job .org{margin:2px 0 14px;color:var(--muted)}
+.job .org strong{color:var(--ink);font-weight:600}
+.job ul{margin:0;padding-left:18px}
+.job ul li{margin-bottom:8px;max-width:68ch}
+.job ul li::marker{color:var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.tag{font-size:13px;padding:4px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--line)}
+
+/* projects */
+.projects{display:grid;gap:16px}
+.project{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px 26px;display:grid;grid-template-columns:1fr auto;gap:8px 24px}
+.project:first-child{border-color:var(--accent);box-shadow:inset 4px 0 0 var(--accent)}
+.project h3{margin:0;font-family:var(--display);font-size:22px;font-weight:700;letter-spacing:-.01em}
+.project .meta{color:var(--muted);font-size:14px;text-align:right}
+.project p{grid-column:1/-1;margin:4px 0 0;color:var(--muted);max-width:70ch}
+.project .tags{grid-column:1/-1;margin-top:10px}
+
+/* toolchain */
+.stack{margin:0}
+.stack>div{display:grid;grid-template-columns:200px 1fr;gap:12px 24px;padding:16px 0;border-bottom:1px solid var(--line)}
+.stack>div:first-child{padding-top:0}
+.stack dt{font-weight:600}
+.stack dd{margin:0;display:flex;flex-wrap:wrap;gap:8px}
+
+/* certs */
+.certs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px}
+.certs li{padding:16px 0;border-bottom:1px solid var(--line)}
+.certs strong{display:block;font-weight:600}
+.certs span{color:var(--muted);font-size:15px}
+.edu{margin-top:36px;padding:20px 24px;border-radius:16px;background:var(--accent-soft)}
+.edu strong{display:block;font-family:var(--display);font-size:20px}
+
+/* contact */
+.contact{padding:96px 0 72px;border-top:1px solid var(--line)}
+.contact h2{font-size:clamp(44px,7vw,92px);font-variation-settings:"wdth" 78;font-weight:800;line-height:.92;letter-spacing:-.03em;max-width:14ch}
+.contact p{color:var(--muted);max-width:52ch;margin:20px 0 32px}
+.mail{display:inline-block;font-family:var(--display);font-size:clamp(22px,3.4vw,36px);font-weight:600;color:var(--ink);text-decoration:none;border-bottom:3px solid var(--accent);padding-bottom:2px;word-break:break-all}
+.mail:hover{color:var(--accent)}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+footer{padding:24px 0 40px;color:var(--muted);font-size:14px}
+
+@media (max-width: 900px){
+  .hero .wrap{grid-template-columns:1fr;gap:44px}
+  .sec-head{grid-template-columns:1fr;gap:28px}
+  .sec-intro{max-width:none}
+}
+@media (max-width: 640px){
+  body{font-size:16px}
+  .hero{padding:44px 0 64px}
+  section.block{padding:64px 0}
+  .nav ul{display:none}
+  .stages{padding:18px 10px 14px}
+  .stages li{font-size:11px}
+  .stack>div{grid-template-columns:1fr}
+  .certs{grid-template-columns:1fr}
+  .project{grid-template-columns:1fr}
+  .project .meta{text-align:left}
+  .log{height:220px;font-size:12px}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Anuj Syal</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#impact">Impact</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#toolchain">Toolchain</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="theme-btn" id="themeBtn" aria-label="Switch colour theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="status"><i></i>Open to DevOps roles in Delhi NCR, Bengaluru or remote</p>
+        <h1><span>Anuj</span><span>Syal</span></h1>
+        <p class="lede">Senior Engineer at Comviva. I build CI/CD pipelines, containerised environments and test automation, <em>and right now I test LLM-powered Agentic AI products.</em></p>
+        <div class="actions">
+          <a class="btn primary" href="mailto:anujsyal7@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            Email me</a>
+          <a class="btn" href="https://www.linkedin.com/in/anuj-syal/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4z"/></svg>
+            LinkedIn</a>
+          <a class="btn" href="https://www.github.com/Anujsyal" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></svg>
+            GitHub</a>
+        </div>
+      </div>
+
+      <div class="pipe" aria-label="Animated deployment pipeline summarising Anuj's profile">
+        <div class="pipe-head">
+          <div class="pipe-title">anuj-syal / career<small>Branch main, triggered by you</small></div>
+          <span class="badge" id="badge">Running</span>
+          <button class="rerun" id="rerun">Run again</button>
+        </div>
+        <ol class="stages" id="stages">
+          <li><span class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>Checkout<span class="t"></span></li>
+          <li><span class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>Build<span class="t"></span></li>
+          <li><span class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>Test<span class="t"></span></li>
+          <li><span class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>Scan<span class="t"></span></li>
+          <li><span class="node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>Deploy<span class="t"></span></li>
+        </ol>
+        <div class="log" id="log" role="log" aria-live="off"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block about">
+    <div class="wrap sec-head">
+      <div><h2>About</h2></div>
+      <div>
+        <p>Four years of making software ship reliably, first by testing it hard, then by automating how it gets built, checked and deployed.</p>
+        <p class="small">I design automation frameworks with Selenium, Playwright, TestNG, Cucumber BDD and Robot Framework, and I run them inside Jenkins and GitHub Actions pipelines on Docker and Kubernetes. At Comviva I validate LLM-driven chatbots for campaign creation and business analytics on the MRTM platform, while owning the pipelines, monitoring scripts and container environments behind them.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="impact">
+    <div class="wrap sec-head">
+      <div>
+        <h2>Impact</h2>
+        <p class="sec-intro">Measured results from my work at Comviva.</p>
+      </div>
+      <div>
+        <ul class="meters">
+          <li><span class="label">Server and network issues resolved faster</span><span class="val">40%</span><span class="bar"><i style="--w:100%"></i></span></li>
+          <li><span class="label">Deployment time cut with rebuilt CI/CD pipelines</span><span class="val">30%</span><span class="bar"><i style="--w:75%"></i></span></li>
+          <li><span class="label">Faster code retrieval after repository optimisation</span><span class="val">25%</span><span class="bar"><i style="--w:62.5%"></i></span></li>
+          <li><span class="label">Container efficiency gained on Docker and Kubernetes</span><span class="val">20%</span><span class="bar"><i style="--w:50%"></i></span></li>
+          <li><span class="label">Faster incident response from shell-based health monitoring</span><span class="val">20%</span><span class="bar"><i style="--w:50%"></i></span></li>
+        </ul>
+        <div class="counts">
+          <span><b>1,000+</b>test cases executed</span>
+          <span><b>50+</b>ad campaigns validated</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="experience">
+    <div class="wrap sec-head">
+      <div>
+        <h2>Experience</h2>
+        <p class="sec-intro">From quality engineering into DevOps and AI testing.</p>
+      </div>
+      <ol class="timeline">
+        <li class="job current">
+          <div class="job-top"><h3>Senior Engineer</h3><span class="when">May 2025 to present</span></div>
+          <p class="org"><strong>Comviva</strong>, Agentic AI and MobiLytix Real-Time Marketing</p>
+          <ul>
+            <li>Test and validate LLM-powered chatbot features for campaign creation, business analytics and customer engagement.</li>
+            <li>Verify AI-generated insights on revenue trends, cohort analysis, churn indicators and campaign performance.</li>
+            <li>Built and optimised CI/CD pipelines with Jenkins, GitHub Actions and Maven, cutting deployment time by 30%.</li>
+            <li>Run Docker and Kubernetes test environments, improving container efficiency by 20% while keeping them highly available.</li>
+            <li>Wrote shell scripts for health monitoring that sped up incident response by 20%.</li>
+          </ul>
+          <div class="tags"><span class="tag">Jenkins</span><span class="tag">GitHub Actions</span><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Kafka</span><span class="tag">PostgreSQL</span><span class="tag">LLM testing</span></div>
+        </li>
+        <li class="job">
+          <div class="job-top"><h3>QA Engineer</h3><span class="when">Jul 2022 to Feb 2025</span></div>
+          <p class="org"><strong>Keywords Studios</strong>, streaming platform for Nexoom AG</p>
+          <ul>
+            <li>Executed 1,000+ functional, UI, API, performance, security and usability test cases.</li>
+            <li>Validated 50+ ad campaigns across pre-roll, home banner, carousel and in-app formats.</li>
+            <li>Ran authentication, authorisation, load and stress testing on critical modules.</li>
+            <li>Integrated automated suites into Jenkins pipelines and ran API testing with Postman.</li>
+          </ul>
+          <div class="tags"><span class="tag">Selenium</span><span class="tag">Java</span><span class="tag">TestNG</span><span class="tag">Postman</span><span class="tag">Jenkins</span><span class="tag">Extent Reports</span></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="projects">
+    <div class="wrap sec-head">
+      <div>
+        <h2>Projects</h2>
+        <p class="sec-intro">The products I've shipped quality into.</p>
+      </div>
+      <div class="projects">
+        <article class="project">
+          <h3>Agentic AI: MRTM ChatBox</h3>
+          <span class="meta">Comviva, 2026</span>
+          <p>A conversational AI assistant that lets marketers create campaigns and read business analytics by chatting. I validate prompt-based campaign generation, check that AI recommendations match business rules, and test response accuracy and usability with the AI team.</p>
+          <div class="tags"><span class="tag">LLM testing</span><span class="tag">Prompt validation</span><span class="tag">API testing</span></div>
+        </article>
+        <article class="project">
+          <h3>MobiLytix Real-Time Marketing</h3>
+          <span class="meta">Comviva, 2025</span>
+          <p>An AI-driven real-time personalisation platform. I handle web automation, database and integration testing, and the Docker-based deployments that keep data in sync across personalisation features.</p>
+          <div class="tags"><span class="tag">Docker</span><span class="tag">Kafka</span><span class="tag">MySQL</span><span class="tag">Web automation</span></div>
+        </article>
+        <article class="project">
+          <h3>Streaming platform testing</h3>
+          <span class="meta">Nexoom AG, 2023 to 2025</span>
+          <p>Manual and automation testing for a streaming website and app, covering 99% of requirements and managing 100+ ad placements through the admin panel.</p>
+          <div class="tags"><span class="tag">Selenium</span><span class="tag">Performance testing</span><span class="tag">Ad validation</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="toolchain">
+    <div class="wrap sec-head">
+      <div>
+        <h2>Toolchain</h2>
+        <p class="sec-intro">Grouped by where it sits in the delivery pipeline.</p>
+      </div>
+      <dl class="stack">
+        <div><dt>CI/CD</dt><dd><span class="tag">Jenkins</span><span class="tag">GitHub Actions</span><span class="tag">Azure Pipelines</span><span class="tag">Maven</span><span class="tag">Git</span><span class="tag">SonarQube</span></dd></div>
+        <div><dt>Containers and IaC</dt><dd><span class="tag">Docker</span><span class="tag">Kubernetes</span><span class="tag">Terraform</span><span class="tag">Ansible</span></dd></div>
+        <div><dt>Cloud</dt><dd><span class="tag">AWS EC2</span><span class="tag">AWS S3</span><span class="tag">Azure DevOps</span><span class="tag">Azure VMs</span></dd></div>
+        <div><dt>Observability</dt><dd><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">Kafka</span><span class="tag">Log analysis</span></dd></div>
+        <div><dt>Test automation</dt><dd><span class="tag">Playwright</span><span class="tag">Selenium WebDriver</span><span class="tag">TestNG</span><span class="tag">Cucumber BDD</span><span class="tag">Robot Framework</span><span class="tag">Pytest</span></dd></div>
+        <div><dt>API and performance</dt><dd><span class="tag">Postman</span><span class="tag">JMeter</span><span class="tag">Fiddler</span></dd></div>
+        <div><dt>Languages and data</dt><dd><span class="tag">Java</span><span class="tag">TypeScript</span><span class="tag">Python</span><span class="tag">Shell</span><span class="tag">MySQL</span><span class="tag">PostgreSQL</span></dd></div>
+        <div><dt>Workflow</dt><dd><span class="tag">JIRA</span><span class="tag">TestRail</span><span class="tag">Linear</span><span class="tag">Agile</span><span class="tag">Linux</span></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="block" id="certifications">
+    <div class="wrap sec-head">
+      <div>
+        <h2>Learning</h2>
+        <p class="sec-intro">Certifications and education.</p>
+      </div>
+      <div>
+        <ul class="certs">
+          <li><strong><a href="https://www.udemy.com/certificate/UC-5a707785-578f-464b-bc48-5aaa6a621b36/" target="_blank" rel="noopener">Playwright JS/TS Automation Testing</a></strong><span>Udemy, 2026</span></li>
+          <li><strong>DevOps Certification Training</strong><span>Simplilearn, 2023</span></li>
+          <li><strong><a href="https://www.coursera.org/account/accomplishments/certificate/U53HMZALSB4H" target="_blank" rel="noopener">Crash Course on Python</a></strong><span>Coursera, 2021</span></li>
+          <li><strong>AWS Cloud Technical Essentials</strong><span>Coursera, 2021</span></li>
+        </ul>
+        <div class="edu">
+          <strong>B.Tech, Mechanical Engineering</strong>
+          HMR Institute of Technology and Management, Delhi, 2015 to 2019
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2>Need someone to own your pipeline?</h2>
+      <p>I'm looking for DevOps roles where I can build CI/CD, container platforms and automated quality checks. Based in New Delhi, open to Delhi NCR, Bengaluru and remote.</p>
+      <a class="mail" href="mailto:anujsyal7@gmail.com">anujsyal7@gmail.com</a>
+      <div class="links">
+        <a class="btn" href="https://www.linkedin.com/in/anuj-syal/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://www.github.com/Anujsyal" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">Anuj Syal, New Delhi, 2026</div></footer>
+
+<script>
+(function(){
+  // theme toggle
+  var root=document.documentElement;
+  try{var saved=localStorage.getItem('theme');if(saved)root.setAttribute('data-theme',saved);}catch(e){}
+  document.getElementById('themeBtn').addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    var next=cur==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('theme',next);}catch(e){}
+  });
+
+  // pipeline
+  var stages=[
+    {t:'3s', lines:[['cmd','$ git clone github.com/Anujsyal'],['ok','Fetched 4+ years of history']]},
+    {t:'14s',lines:[['cmd','$ docker build -t anuj:senior-engineer .'],['ok','Built with Java, TypeScript, Python, Shell']]},
+    {t:'41s',lines:[['cmd','$ npx playwright test && mvn test'],['ok','1,000+ test cases passed, 0 failed'],['ok','LLM chatbot responses validated']]},
+    {t:'9s', lines:[['cmd','$ sonar-scanner'],['ok','Quality gate passed']]},
+    {t:'6s', lines:[['cmd','$ kubectl rollout status deploy/anuj'],['ok','Deployment time cut by 30%'],['live','Live: Senior Engineer, open to DevOps roles']]}
+  ];
+  var lis=[].slice.call(document.querySelectorAll('#stages li'));
+  var log=document.getElementById('log');
+  var badge=document.getElementById('badge');
+  var timers=[];
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function line(cls,text){
+    var c=log.querySelector('.cursor'); if(c) c.remove();
+    var d=document.createElement('div'); d.className=cls; d.textContent=text; log.appendChild(d);
+    var cur=document.createElement('span'); cur.className='cursor'; log.appendChild(cur);
+    log.scrollTop=log.scrollHeight;
+  }
+  function setState(i,s){lis[i].className=s; if(s==='pass') lis[i].querySelector('.t').textContent=stages[i].t;}
+  function done(){badge.textContent='Passed';badge.classList.add('ok');}
+  function reset(){
+    timers.forEach(clearTimeout); timers=[];
+    log.innerHTML=''; badge.textContent='Running'; badge.classList.remove('ok');
+    lis.forEach(function(li){li.className='';li.querySelector('.t').textContent='';});
+  }
+  function run(){
+    reset();
+    if(reduce){
+      stages.forEach(function(s,i){s.lines.forEach(function(l){line(l[0],l[1]);});setState(i,'pass');});
+      done(); return;
+    }
+    var t=400;
+    stages.forEach(function(s,i){
+      timers.push(setTimeout(function(){setState(i,'run');},t));
+      s.lines.forEach(function(l,j){timers.push(setTimeout(function(){line(l[0],l[1]);},t+350+j*520));});
+      t+=350+s.lines.length*520+200;
+      timers.push(setTimeout(function(){setState(i,'pass');},t));
+    });
+    timers.push(setTimeout(done,t+100));
+  }
+  document.getElementById('rerun').addEventListener('click',run);
+  run();
+})();
+</script>
+</body>
+</html>
